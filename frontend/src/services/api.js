@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // URL del backend - usa variable de entorno en producción o localhost en desarrollo
 const API_URL = import.meta.env.VITE_API_URL || 
-  (import.meta.env.DEV ? 'http://localhost:5000' : 'https://to-do-backend-1hcr.onrender.com');
+  (import.meta.env.DEV ? 'http://localhost:5000' : 'https://tu-backend.onrender.com');
 
 const api = axios.create({
   baseURL: API_URL + '/api',
@@ -32,7 +32,6 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       window.location.href = '/login';
-      console.log('Token expirado');
     }
     return Promise.reject(error);
   }

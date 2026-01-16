@@ -10,24 +10,32 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-// Configurar CORS para permitir requests desde GitHub Pages y localhost
+// ==============================
+// CORS CONFIGURACIÓN CORRECTA
+// ==============================
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
+  'https://jojan777.github.io/To-Do_Personal/',
+  'https://to-do-backend-1hcr.onrender.com'
+];
+
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Permitir requests sin origin (como Postman) o desde localhost/GitHub Pages
-    if (!origin || 
-        origin.includes('localhost') || 
-        origin.includes('127.0.0.1') ||
-        origin.includes('github.io')) {
-      callback(null, true);
-    } else {
-      callback(null, true); // En desarrollo, permite todos (cambiar en producción)
+  origin: (origin, callback) => {
+    // Permite Postman y server-to-server
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, origin);
     }
-  },
-  credentials: true,
+
+    return callback(new Error('Not allowed by CORS'));
+  }
 };
 
 app.use(cors(corsOptions));
+// ==============================
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -42,7 +50,7 @@ app.get('/api', (req, res) => {
 
 // Conexión a MongoDB
 mongoose
-  .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/todo-app')
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('✅ Conectado a MongoDB');
     app.listen(PORT, () => {
