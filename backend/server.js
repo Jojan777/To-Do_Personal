@@ -11,7 +11,23 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+// Configurar CORS para permitir requests desde GitHub Pages y localhost
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Permitir requests sin origin (como Postman) o desde localhost/GitHub Pages
+    if (!origin || 
+        origin.includes('localhost') || 
+        origin.includes('127.0.0.1') ||
+        origin.includes('github.io')) {
+      callback(null, true);
+    } else {
+      callback(null, true); // En desarrollo, permite todos (cambiar en producción)
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

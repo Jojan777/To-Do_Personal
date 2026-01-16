@@ -207,6 +207,28 @@ To-Do_Personal/
 - Modo oscuro
 - Drag and drop para reordenar
 
+## 🚀 Despliegue
+
+Para desplegar la aplicación en producción:
+
+- **Backend**: Ver guía en `DESPLIEGUE_RENDER.md` (Render - Gratis)
+- **Frontend**: Ver guía en `DESPLIEGUE_GITHUB_PAGES.md` (GitHub Pages - Gratis)
+- **Guía General**: Ver `GUIA_DESPLIEGUE.md` para opciones alternativas
+
+### Despliegue Rápido:
+
+1. **Backend en Render** (5 minutos):
+   - Crea cuenta en [Render.com](https://render.com)
+   - Conecta tu repositorio
+   - Configura variables de entorno
+   - Obtén la URL del backend
+
+2. **Frontend en GitHub Pages** (5 minutos):
+   - Configura GitHub Actions (ya incluido)
+   - Actualiza la URL del backend en el código
+   - Push a GitHub
+   - ¡Listo!
+
 ## 📄 Licencia
 
 Este proyecto es de código abierto y está disponible para uso educativo y personal.

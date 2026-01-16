@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+// URL del backend - usa variable de entorno en producción o localhost en desarrollo
+const API_URL = import.meta.env.VITE_API_URL || 
+  (import.meta.env.DEV ? 'http://localhost:5000' : 'https://to-do-backend-1hcr.onrender.com');
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: API_URL + '/api',
   headers: {
     'Content-Type': 'application/json',
   },
